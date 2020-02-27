@@ -39,11 +39,15 @@
 
     }, false);
 
-    // utilise
+    // A best practice is to use Paul Irish's requestAnimationFrame.
+    // The previous was of doing this was to use setInterval to run at your desired frame rate.
+    // However requestAnimationFrame is now available is all major browers and offers a higher performance
+    // then setInterval when used correctly. 
     var onscrollEvent = function () {
       window.requestAnimationFrame(scrollHandler);
     }
 
+    // Example elements to animate.
     var scrollHandler = function () {
       document.getElementById('a').style.marginTop = (window.scrollY * 1.0) + '%';
       document.getElementById('b').style.marginTop = (window.scrollY * 1.1) + '%';
