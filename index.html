@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Document</title>
+</head>
+
+<body style="height: 1000px">
+
+  <img id="a" style="position: absolute; left: 0;" src="http://placekitten.com/g/200/300">
+  <img id="b" style="position: absolute; left: 200px;" src="http://placekitten.com/g/200/300">
+  <img id="c" style="position: absolute; left: 400px;" src="http://placekitten.com/g/200/300">
+  <img id="d" style="position: absolute; left: 600px;" src="http://placekitten.com/g/200/300">
+
+  <script>
+
+    // Setup isScrolling variable
+    var isScrolling;
+
+    // start timestamp
+    var start = null;
+
+    // Listen for scroll events
+    window.addEventListener('scroll', function (event) {
+
+      // Clear our timeout throughout the scroll
+      window.clearTimeout(isScrolling);
+
+      // request to animate frames
+      onscrollEvent();
+
+      // Set a timeout to run after scrolling ends
+      isScrolling = setTimeout(function () {
+
+        // Run the callback
+        window.cancelAnimationFrame(scrollHandler);
+
+      }, 0);
+
+    }, false);
+
+    // utilise
+    var onscrollEvent = function () {
+      window.requestAnimationFrame(scrollHandler);
+    }
+
+    //
+    var scrollHandler = function (timestamp) {
+      if (!start) start = timestamp;
+      var progress = timestamp - start;
+      document.getElementById('a').style.marginTop = (window.scrollY * 1.0) + '%';
+      document.getElementById('b').style.marginTop = (window.scrollY * 1.1) + '%';
+      document.getElementById('c').style.marginTop = (window.scrollY * 1.2) + '%';
+      document.getElementById('d').style.marginTop = (window.scrollY * 1.3) + '%';
+      if (progress < 2000) {
+        window.requestAnimationFrame(scrollHandler);
+      }
+    }
+
+  </script>
+
+</body>
+
+</html>
